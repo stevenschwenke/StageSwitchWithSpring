@@ -4,8 +4,7 @@ import org.springframework.context.annotation.PropertySource;
 
 import static constants.Constants.KEY_SPRING_PROFILE;
 
-//@PropertySource("classpath:${"+KEY_SPRING_PROFILE+":developer}/client.properties")
-@PropertySource("classpath:${spring.profiles.active:developer}/client.properties") // todo remove after testing and use line above
+@PropertySource("classpath:${"+KEY_SPRING_PROFILE+":developer}/client.properties")
 @Configuration
 public class Properties
 {
