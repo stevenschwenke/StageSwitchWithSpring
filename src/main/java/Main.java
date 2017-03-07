@@ -8,7 +8,7 @@ public class Main {
 
         Properties properties = ctx.getBean(Properties.class);
 
-        System.out.println("Running on "+properties.getMyProperty());
+        System.out.println("Running on "+properties.getStage());
 
         // Use properties accordingly ...
 //        properties.getWebAppName()

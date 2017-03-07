@@ -1,6 +1,6 @@
-import org.junit.Rule;
+import constants.Constants;
+import org.junit.ClassRule;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.ClearSystemProperties;
 import org.junit.contrib.java.lang.system.ProvideSystemProperty;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,9 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestInstanceTest {
 
-    @Rule
-    public final ProvideSystemProperty myPropertyHasMyValue = new ProvideSystemProperty("spring.profiles.active", "test");
+    // This has to be a ClassRule to set the property before the Spring setup started. Rule is not sufficient here.
+    @ClassRule
+    public static final ProvideSystemProperty provideSystemProperty = new ProvideSystemProperty(Constants.KEY_SPRING_PROFILE, "test");
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -23,13 +24,10 @@ public class TestInstanceTest {
     @Test
     public void propertyTest() {
 
-        // TODO System-Rules seems to be not comaptible with Spring because the Spring context is created before the
-        // rule above is executed. Hence, the system property is set AFTER Spring decided which property-file to load.
-        // Question: Is there a way to use System-Rules with Spring?
-        assertEquals("test", System.getProperty("spring.profiles.active"));
+        assertEquals("test", System.getProperty(Constants.KEY_SPRING_PROFILE)); // remove after test
 
         Properties properties = applicationContext.getBean(Properties.class);
-        assertEquals("test-instance", properties.getMyProperty());
+        assertEquals("/MyProject/", properties.getWebAppName()); // remove after test
+        assertEquals("test-instance", properties.getStage());
     }
-
 }

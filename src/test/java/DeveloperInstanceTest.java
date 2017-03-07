@@ -1,7 +1,4 @@
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.ClearSystemProperties;
-import org.junit.contrib.java.lang.system.ProvideSystemProperty;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -14,16 +11,13 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class DeveloperInstanceTest {
 
-    @Rule
-    public final ClearSystemProperties myPropertyIsCleared = new ClearSystemProperties("spring.profiles.active");
-
     @Autowired
     private ApplicationContext applicationContext;
 
     @Test
     public void propertyTest() {
         Properties properties = applicationContext.getBean(Properties.class);
-        assertEquals("developer-instance", properties.getMyProperty());
+        assertEquals("developer-instance", properties.getStage());
     }
 
 }
