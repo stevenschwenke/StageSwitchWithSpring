@@ -1,0 +1,1 @@
+This is a simple example of how to realize a switch between several stages with Spring. Deployed test / quality / productive stages often use different file paths or settings. Hence, the server has to recognize which stage he is running on.

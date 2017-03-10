@@ -11,6 +11,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test for the test stage that uses a system property spring.profiles.active=test.
+ */
 @ContextConfiguration(classes = {Config.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 @DirtiesContext
@@ -25,8 +28,6 @@ public class TestInstanceTest {
 
     @Test
     public void propertyTest() {
-
-
         Properties properties = applicationContext.getBean(Properties.class);
         assertEquals("test-instance", properties.getStage());
     }
